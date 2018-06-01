@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Departments.Dept.Department_Controller">
+    <children>
+        <ImageView fx:id="civil" fitHeight="130.0" fitWidth="130.0" layoutX="525.0" layoutY="190.0" onMouseClicked="#loadnext_civil" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resource/Dept_imgs/civil.png" />
+            </image></ImageView>
+        <ImageView fx:id="cse" fitHeight="130.0" fitWidth="130.0" layoutX="793.0" layoutY="190.0" onMouseClicked="#loadnext_cse" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resource/Dept_imgs/cse.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="ece" fitHeight="130.0" fitWidth="130.0" layoutX="524.0" layoutY="445.0" onMouseClicked="#loadnext_ece" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resource/Dept_imgs/ece.png" />
+            </image></ImageView>
+        <ImageView fx:id="eee" fitHeight="130.0" fitWidth="130.0" layoutX="231.0" layoutY="190.0" onMouseClicked="#loadnext_eee" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resource/Dept_imgs/electrical.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="245.0" layoutY="339.0" text="Electrical">
+            <font>
+                <Font name="Modern No. 20" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="567.0" layoutY="333.0" text="Civil">
+            <font>
+                <Font name="Modern No. 20" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="775.0" layoutY="336.0" text="Computer Science">
+            <font>
+                <Font name="Modern No. 20" size="24.0" />
+            </font>
+        </Label>
+        <ImageView fx:id="ise" fitHeight="130.0" fitWidth="130.0" layoutX="230.0" layoutY="448.0" onMouseClicked="#loadnext_ise" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resource/Dept_imgs/ise.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="100.0" fitWidth="242.0" layoutX="1192.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resource/CMRIT.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="tce" fitHeight="130.0" fitWidth="130.0" layoutX="793.0" layoutY="445.0" onMouseClicked="#loadnext_tce" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resource/Dept_imgs/tce.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="201.0" layoutY="599.0" text="Information Science">
+            <font>
+                <Font name="Modern No. 20" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="533.0" layoutY="596.0" text="Electronics">
+            <font>
+                <Font name="Modern No. 20" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="767.0" layoutY="596.0" text="Telecommunication">
+            <font>
+                <Font name="Modern No. 20" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="481.0" layoutY="42.0" text="DEPARTMENTS" textFill="#136bd7">
+            <font>
+                <Font name="Clarendon BT Bold" size="48.0" />
+            </font>
+        </Label>
+      <ImageView fx:id="mech" fitHeight="130.0" fitWidth="130.0" layoutX="1062.0" layoutY="190.0" onMouseClicked="#loadnext_mech" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resource/Dept_imgs/mechanical.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="1071.0" layoutY="339.0" text="Mechanical">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="back" fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#goback" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resource/back.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="73.0" layoutY="29.0" text="Back">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

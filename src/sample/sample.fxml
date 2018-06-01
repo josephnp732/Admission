@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <ImageView fx:id="student" fitHeight="130.0" fitWidth="130.0" layoutX="625.0" layoutY="191.0" onMouseClicked="#loadnext2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/student.png" />
+         </image></ImageView>
+      <ImageView fx:id="parent" fitHeight="130.0" fitWidth="130.0" layoutX="893.0" layoutY="191.0" onMouseClicked="#loadnext3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/Parents.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="recruiter" fitHeight="130.0" fitWidth="130.0" layoutX="624.0" layoutY="446.0" onMouseClicked="#loadnext5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/Recruiters.png" />
+         </image></ImageView>
+      <ImageView fx:id="about" fitHeight="130.0" fitWidth="130.0" layoutX="331.0" layoutY="191.0" onMouseClicked="#loadnext1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/About.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="366.0" layoutY="340.0" text="About">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="646.0" layoutY="334.0" text="Students">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="921.0" layoutY="337.0" text="Parents">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="alumni" fitHeight="130.0" fitWidth="130.0" layoutX="330.0" layoutY="449.0" onMouseClicked="#loadnext4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/Alumni.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="242.0" layoutX="1188.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/CMRIT.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="stat" fitHeight="130.0" fitWidth="130.0" layoutX="893.0" layoutY="446.0" onMouseClicked="#loadnext6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/board.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="357.0" layoutY="600.0" text="Alumni">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="639.0" layoutY="597.0" text="Recruiters">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="934.0" layoutY="597.0" text="Stats">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="519.0" layoutY="42.0" text="PLACEMENTS" textFill="#136bd7">
+         <font>
+            <Font name="Clarendon BT Bold" size="48.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="back" fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#goback" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/back.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="76.0" layoutY="26.0" text="Back">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

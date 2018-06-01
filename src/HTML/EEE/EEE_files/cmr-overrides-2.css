@@ -1,0 +1,435 @@
+/*
+CMR Overrides CSS Template
+By: Junaid Bhura
+http://www.junaidbhura.com
+*/
+
+/*-----------------------------------------------------------------------------------*/
+/*	1.	Editable Colors
+/*-----------------------------------------------------------------------------------*/
+/* Color 1 */
+body,
+#nav > li > a,
+#home-cols .col a,
+#home-events h2 a,
+#home-events .recent .events article a,
+footer .input-text,
+#home-news .cols a .view,
+.section.four-col-image .cols article .hover,
+.section.two-col-image article .hover,
+.section.three-col-image article .hover,
+.cms-content table td b,
+.cms-content table td strong,
+.cms-content table th,
+.section.three-col-hover .cols article .details,
+#contact .col-left p a,
+#contact .col-right .input-text,
+#contact .col-right textarea,
+#contact .col-right .select-holder select,
+.section.two-col .col-right .content p a,
+.section.two-col-image.colors-2 p a,
+.section.four-col-image.colors-2 .cols article p,
+.section.four-col-image.colors-2 .cols article p a,
+.section.three-col-icon.colors-2 .cols article p,
+.section.three-col-icon.colors-2 .cols article p a,
+.section.four-col-icon.colors-2 .cols article p,
+.section.four-col-icon.colors-2 .cols article p a,
+.section.three-col p a,
+.section.hover-info article.hover p a,
+.section.three-col-image .view-details-link,
+.section.four-col-image.colors-3 .view-details-link,
+#page-nav,
+#page-nav a,
+#kitchen-sink a,
+#people .people li,
+#people .people li a,
+.cms-content a,
+.section.info-downloads li a,
+.section.faculty-listing li a,
+#calendar a,
+.widget.calendar td a,
+.widget.calendar td.today,
+.section.hover-info article.inner-text .view {
+	color:#2C3E50 !important;
+}
+.subnav > ul,
+footer .top,
+#home-slider .links a,
+#home-slider .read-more,
+.cms-content a.action-button,
+.section.two-col .col-right p a.action-button,
+#home-news .filters li a,
+#home-news .cols a .title,
+.section .view-details-link,
+.section.two-col-image.colors-1,
+.section.three-col-image.colors-1,
+.section.three-col-icon.colors-1,
+.section.three-col-image-bullets.colors-1,
+#contact .col-right button,
+.section.two-col .col-right .quick-question .form button,
+.section.four-col-image.colors-3,
+.section.four-col-icon.colors-3,
+#page-title,
+#calendar .month-nav,
+#calendar .grid-view td .day,
+.section.hover-info article.hover:hover,
+.section.hover-info article.hover p,
+.section.image.colors-1,
+#single-event h1 {
+	background-color:#2C3E50;
+}
+footer .back-to-top,
+#announcements .label,
+.section.hover-info article.hover:hover {
+	border-color:#2C3E50 !important;
+}
+
+/* Color 2 */
+.subnav > ul > li .third-level,
+footer .bottom,
+.section.image.colors-2,
+#single-event .details,
+#single-event .box .register {
+	background-color:#35495E;
+}
+
+/* Color 3 */
+#home-news .testimonials article h4,
+#home-events .recent h2 a:hover,
+#home-events h3.subtitle,
+#contact .col-left p strong,
+#contact .addresses p span,
+.cms-content p .highlight,
+.cms-content li .highlight,
+.section.two-col .col-right .content p .highlight,
+.cms-content a:hover,
+.section.two-col .col-right section.highlight,
+.section.two-col.colors-2 h2,
+.section.two-col-text h2,
+.section.info-downloads.colors-1 h2,
+.section.info-downloads.colors-2 h2,
+.section.faculty-listing.colors-1 h2,
+.section.faculty-listing.colors-2 h2,
+.section.info-downloads.colors-2 h2,
+.section.faculty-listing.colors-2 h2,
+.section.three-col-hover.colors-2 h2,
+.section.two-col-image.colors-2 h2,
+.section.four-col-image.colors-2 h2,
+.section.four-col-image.colors-2 h3,
+.section.three-col-icon.colors-2 h2,
+.section.three-col-icon.colors-2 h3,
+.section.four-col-icon.colors-2 h2,
+.section.four-col-icon.colors-2 h3,
+.section.department-events h3,
+.section.faqs h2,
+.section.faqs article h4 a,
+.cms-content h2,
+#page-nav a.active,
+#kitchen-sink a.active,
+#people article li a .bullet,
+#people .people li a:hover,
+.section.info-downloads li a:hover,
+.section.faculty-listing li a:hover,
+.section.two-col .col-right .content p a:hover,
+#page-nav a:hover,
+#single-event .back-link,
+#single-event .box h3,
+#single-event .prev-link,
+#single-event .next-link {
+	color:#2981BA !important;
+}
+#home-events .coming-up article,
+.section.three-col-icon.colors-3,
+#announcements,
+.section.image.colors-3 {
+	background-color:#2981BA;
+}
+.section.two-col.colors-2 h2,
+.section.info-downloads.colors-2 h2,
+.section.faculty-listing.colors-2 h2,
+.section.three-col-hover.colors-2 h2,
+.section.two-col-image.colors-2 h2,
+.section.four-col-icon.colors-2 h2,
+.section.two-col .col-right .quick-question h3,
+#single-event .about-speakers,
+#single-event .box {
+	border-color:#2981BA !important;
+}
+
+/* Color 4 */
+.subnav a:hover,
+.subnav > ul > li.active > a,
+.subnav > ul > li.current-menu-ancestor > a,
+.subnav > ul > li .third-level li.title,
+#home-slider .content .read-more,
+.cms-content a.action-button,
+.section.two-col .col-right p a.action-button,
+.section.two-col-image.colors-2 p a.action-button,
+#home-slider .links a,
+#home-news .filters li a:hover,
+#home-news .filters li.active a,
+#home-news .cols a .title,
+.section .view-details-link,
+.section.two-col-image.colors-1 h2,
+.section.three-col-image.colors-1 h2,
+.section.three-col-image.colors-1 h3,
+.section.four-col-image.colors-1 h2,
+.section.four-col-image.colors-1 h3,
+.section.four-col-image.colors-3 h2,
+.section.four-col-image.colors-3 h3,
+.section.three-col-icon.colors-1 h2,
+.section.three-col-icon.colors-1 h3,
+.section.three-col-icon.colors-3 h2,
+.section.three-col-icon.colors-3 h3,
+.section.four-col-icon.colors-1 h2,
+.section.four-col-icon.colors-1 h3,
+.section.four-col-icon.colors-3 h2,
+.section.four-col-icon.colors-3 h3,
+.section.three-col-image-bullets.colors-1 h2,
+#contact .col-right button,
+.section.two-col .col-right .quick-question .form button,
+#calendar .month-nav,
+.section.hover-info article.hover:hover h3,
+footer h4,
+footer a:hover,
+#single-event .details span,
+#single-event .details strong,
+#single-event .box .register {
+	color:#FFCF0A !important;
+}
+header .bottom,
+#home-slider .links h3,
+#home-events .recent .events article .view,
+.section.three-col-hover .cols article .details,
+.widget.calendar td a,
+.section.hover-info article.inner-text .view,
+.section.image.colors-4,
+.section.department-events .row article .view {
+	background-color:#FFCF0A;
+}
+.subnav > ul,
+.section.two-col-text h2,
+.section.two-col-image.colors-1 h2,
+.section.three-col-image.colors-1 h2,
+.section.three-col-image-bullets.colors-1 h2,
+.section.two-col-text h3,
+.section.three-col h3,
+#people .people h2,
+.section.info-downloads h2,
+.section.faculty-listing h2,
+.section.two-col-image article {
+	border-color:#FFCF0A !important;
+}
+
+/* Color 5 */
+#home-slider .content .read-more:hover,
+.cms-content a.action-button:hover,
+.section.two-col .col-right p a.action-button:hover,
+.section.two-col-image.colors-2 p a.action-button:hover,
+#home-slider .links a:hover {
+	color:#F29C1F !important;
+}
+.widget.calendar td.today,
+.widget.calendar td.today a,
+.section.image.colors-5 {
+	background-color:#F29C1F;
+}
+
+/* Color 6 */
+header .top,
+.section.image.colors-6 {
+	background-color:#F6F6F6;
+}
+
+/* Color 7 */
+header .top a {
+	color:#BDC2C6;
+}
+.section.two-col .col-right .quick-question h3,
+.widget.calendar td,
+.section.image.colors-7 {
+	background-color:#BDC2C6;
+}
+header .top .right a,
+#home-cols .col,
+#home-events .recent .events article time,
+#contact .col-right .input-text,
+#contact .col-right textarea,
+.section.two-col .col-right .quick-question .form,
+.section.two-col .col-right .quick-question .form .input-text,
+.section.two-col .col-right .quick-question .form textarea,
+.section.faqs.colors-1 article h4 a,
+#calendar .list-view article,
+#calendar .list-view article .dates p time span,
+.section.department-events .row article time {
+	border-color:#BDC2C6 !important;
+}
+
+/* Color 8 */
+.subnav a,
+.section.two-col-image.colors-1 .content,
+.section.two-col-image.colors-1 .content a,
+#page-title,
+.section.hover-info article.hover:hover p,
+.section.hover-info article.hover:hover p a,
+.section.three-col-image-bullets,
+.section.three-col-image-bullets a,
+footer,
+footer a {
+	color:#ECF0F1 !important;
+}
+#home-cols,
+#home-events .recent .events article,
+.cms-content table td,
+.cms-content table th,
+.section.three-col-hover .cols article,
+#contact .col-right .input-text,
+#contact .col-right textarea,
+#home-news,
+.section.two-col.colors-2,
+.section.info-downloads.colors-2,
+.section.faculty-listing.colors-2,
+.section.three-col-hover.colors-2,
+.section.two-col-image.colors-2,
+.section.four-col-image.colors-2,
+.section.three-col-icon.colors-2,
+.section.two-col .col-right .quick-question .form,
+.section.two-col .col-right section.highlight,
+#page-nav,
+#kitchen-sink,
+#calendar .list-view article .dates p time,
+.widget.calendar td.blank,
+.section.hover-info article.inner-text,
+.section.image.colors-8,
+.section.faqs.colors-2,
+.section.department-events .row article {
+	background-color:#ECF0F1;
+}
+.section.three-col-image .view-details-link,
+.section.four-col-image.colors-3 .view-details-link {
+	background-color:#ECF0F1 !important;
+}
+#people-search .input-text,
+#people-search button,
+#calendar .grid-view td {
+	border-color:#ECF0F1 !important;
+}
+
+/* White */
+.section.three-col-hover.colors-2 .cols article {
+	background-color:#FFF !important;
+}
+.section.faqs.colors-2 article h4 a {
+	border-color: #FFF !important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	2.	Editable Images
+/*-----------------------------------------------------------------------------------*/
+#side-back-to-top {
+	background-image: url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/back-to-top-arrow.png);
+}
+#logo {
+	background-image:url(http://www.cmrit.ac.in/wp-content/uploads/sites/2/2017/06/logo_new1.png);
+}
+#nav > li:hover,
+#nav > li.active,
+#nav > li.current-menu-ancestor {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/nav-arrow-1.png);
+}
+.subnav > ul > li:hover,
+.subnav > ul > li.active,
+.subnav > ul > li.current-menu-ancestor {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/nav-arrow-2.png);
+}
+.subnav > ul > li .third-level li {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/subnav-bullet.png);
+}
+#home-slider .overlay-left {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/home-overlay-left.png);
+}
+#home-slider .overlay-right {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/home-overlay-right.png);
+}
+#home-events .recent .events article a.has-page,
+.section.department-events .row article a.has-page {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/plus-icon.png);
+}
+.royalSlider .rsNav.rsBullets .rsNavItem span {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/slider-nav.png);
+}
+#home-news .filters li.active {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/primary-arrow-tip.png);
+}
+#home-news .cols a .view,
+.section.four-col-image .cols article .hover,
+.section.two-col-image article .hover,
+.section.three-col-image article .hover {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/translucent-yellow.png);
+}
+.section.four-col-image.colors-1 .overlay,
+.section.four-col-icon.colors-1 .overlay {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/translucent-blue.png);
+}
+#contact .col-right .select-holder select {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/contact-dropdown.png);
+}
+#contact .addresses .directions-link .icon {
+	background-image:url();
+}
+.cms-content ul li,
+.section.info-downloads li,
+.section.faculty-listing li,
+#people .people li {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/bullet.png);
+}
+.section.faqs.colors-1 article h4 a span {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/faqs-colors-1.png);
+}
+.section.faqs.colors-2 article h4 a span {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/faqs-colors-2.png);
+}
+#people-search button {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/icon-search.png);
+}
+#calendar .calendar-type a {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/calendar-type.png);
+}
+#calendar .month-nav .prev,
+#calendar .month-nav .next {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/calendar-month-nav.png);
+}
+#calendar .list-view article .content .time,
+#calendar .grid-view td p .time {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/calendar-time.png);
+}
+#calendar .list-view article .content .location,
+#calendar .grid-view td p .location {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/calendar-location.png);
+}
+.section.hover-info article.hover figure .plus {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/more-plus.png);
+}
+.section.three-col-image-bullets .list li {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/section-bullet.png);
+}
+#people article li {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/people-bullet.png);
+}
+footer .google-map {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/map-marker.png);
+}
+footer .connect ul li a {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/footer-connect.png);
+}
+footer button {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/footer-button.png);
+}
+footer .back-to-top {
+	background-image:url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/top-arrow.png);
+}
+#single-event .details .time,
+#single-event .details .location,
+#single-event .box .update-links li a {
+	background-image: url(http://www.cmrit.ac.in/wp-content/themes/cmr/assets/images/defaults/event-sprite.png);
+}

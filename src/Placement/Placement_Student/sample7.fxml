@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane fx:id="rootpane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Placement_Student.Controller7">
+    <children>
+        <WebView fx:id="webview" layoutX="7.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="40.0" />
+        <ImageView fx:id="back" fitHeight="35.0" fitWidth="45.0" layoutX="14.0" layoutY="2.0" onMouseClicked="#goback" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resource/back.png" />
+            </image></ImageView>
+        <Label layoutX="55.0" layoutY="11.0" text="Back">
+            <font>
+                <Font name="Modern No. 20" size="17.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

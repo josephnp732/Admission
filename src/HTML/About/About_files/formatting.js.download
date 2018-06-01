@@ -1,0 +1,80 @@
+/**
+ * Formatting JavaScript
+ *
+ * @package    CMR
+ * @author     Junaid Bhura
+ * @copyright  www.junaidbhura.com
+ */
+
+/*-----------------------------------------------------------------------------------*/
+/*	General Formatting
+/*-----------------------------------------------------------------------------------*/
+function vertically_align( object, container, use_padding ) {
+	var container_height = container.height();
+	var my_height = object.height();
+	var difference = container_height - my_height;
+	if ( difference > 0 ) {
+		if ( use_padding )
+			object.css( 'padding-top', Math.floor( difference / 2 ) + 'px' );
+		else
+			object.css( 'margin-top', Math.floor( difference / 2 ) + 'px' );
+	}
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Home
+/*-----------------------------------------------------------------------------------*/
+function format_home_slider() {
+	$('#home-slider .rsContent .content').each( function() {
+		vertically_align( $(this), $(this).parent(), true );
+	} );
+}
+
+function format_home_events() {
+	$('#home-events .recent .events article a .title').each( function() {
+		vertically_align( $(this), $(this).parent(), true );
+	} );
+}
+
+function format_home_news() {
+	// Temporarily show elements for computation
+	$('#home-news .cols a .view').css( 'display', 'block' );
+
+	$('#home-news .cols a .view span').each( function() {
+		vertically_align( $(this), $(this).parent(), true );
+	} );
+
+	// Hide elements
+	$('#home-news .cols a .view').css( 'display', 'none' );
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Flexible Sections
+/*-----------------------------------------------------------------------------------*/
+function format_page_nav() {
+	if ( $('#page-nav').length != 0 ) {
+		var total_links = $('#page-nav a').length;
+		// Add a BR before the 7th element
+		if ( total_links > 6 ) {
+			$('#page-nav a:eq(6)').before( '<br>' );
+		}
+	}
+}
+
+function format_hover_info_inner_text() {
+	// IE7 Hack :(
+	if ( $.browser.msie && parseInt( $.browser.version, 10 ) === 7 ) {
+		var my_z_index = 1000;
+		$('.section.hover-info article.hover').each( function() {
+			$(this).css( 'z-index', my_z_index );
+			my_z_index -= 10;
+		} );
+	}
+
+	// Inner Text
+	if ( $('.section.hover-info article.inner-text').length != 0 ) {
+		$('.section.hover-info article.inner-text div').each( function() {
+			vertically_align( $(this), $(this).parent(), true );
+		} );
+	}
+}

@@ -1,0 +1,858 @@
+/**
+ * Core JavaScript
+ *
+ * @package    CMR
+ * @author     Junaid Bhura
+ * @copyright  www.junaidbhura.com
+ */
+
+/*-----------------------------------------------------------------------------------*/
+/*	Dropdown Menu
+/*-----------------------------------------------------------------------------------*/
+var dropdown_timeout = 500;
+var dropdown_1_close_timer = 0;
+var dropdown_1_menu_item = 0;
+var dropdown_2_close_timer = 0;
+var dropdown_2_menu_item = 0;
+
+function dropdown_1_open() {
+	dropdown_1_cancel_timer();
+	dropdown_1_close();
+	dropdown_1_menu_item = $('.subnav[data-parent="' + $(this).attr( 'data-slug' ) + '"]').addClass( 'visible' ).css( 'visibility', 'visible' );
+	if ( $('.subnav[data-parent="' + $(this).attr( 'data-slug' ) + '"]' ).length != 0 )
+		$(this).addClass( 'active' );
+}
+
+function dropdown_2_open() {
+	dropdown_2_cancel_timer();
+	dropdown_2_close();
+	dropdown_2_menu_item = $(this).find( '.third-level' ).css( 'visibility', 'visible' );
+	if ( $(this).find( '.third-level' ).length != 0 )
+		$(this).addClass( 'active' );
+}
+
+function dropdown_1_close() {
+	if ( dropdown_1_menu_item ) {
+		dropdown_1_menu_item.removeClass( 'visible' ).css( 'visibility', 'hidden' );
+		$('#nav li').removeClass( 'active' );
+	}
+	dropdown_2_close();
+}
+
+function dropdown_2_close() {
+	if ( dropdown_2_menu_item ) {
+		dropdown_2_menu_item.css( 'visibility', 'hidden' );
+		$('.subnav li').removeClass( 'active' );
+	}
+}
+
+function dropdown_1_timer() {
+	dropdown_1_close_timer = window.setTimeout( dropdown_1_close, dropdown_timeout );
+}
+
+function dropdown_2_timer() {
+	dropdown_2_close_timer = window.setTimeout( dropdown_2_close, dropdown_timeout );
+}
+
+function dropdown_1_cancel_timer() {
+	if ( dropdown_1_close_timer ) {
+		window.clearTimeout( dropdown_1_close_timer );
+		dropdown_1_close_timer = null;
+	}
+}
+
+function dropdown_2_cancel_timer() {
+	if ( dropdown_2_close_timer ) {
+		window.clearTimeout( dropdown_2_close_timer );
+		dropdown_2_close_timer = null;
+	}
+}
+
+$('#nav > li').bind( 'mouseover', dropdown_1_open );
+$('.subnav').bind( 'mouseleave',  dropdown_1_timer );
+$('.subnav li').bind( 'mouseover', dropdown_2_open );
+$('.subnav .third-level').bind( 'mouseleave', dropdown_2_timer );
+
+/* Sticky Subnav */
+var active_subnav = false;
+
+if ( $('#nav > li.current-menu-ancestor').length != 0 ) {
+	// Check if page ancestor's subnav exists
+	active_subnav = $('nav.subnav[data-parent=' + $('#nav > li.current-menu-ancestor').attr( 'data-slug' ) + ']').first();
+	
+	if ( active_subnav.length != 0 ) {
+		active_subnav.addClass( 'always-open' );
+
+		// Scroll event
+		$(window).scroll( function() {
+			if ( $(document).scrollTop() > 105 ) // 105 = height of header
+				active_subnav.addClass( 'sticky' );
+			else
+				active_subnav.removeClass( 'sticky' );
+		} );
+
+		if ( $('#banner').length == 0 ) {
+			$('body').addClass( 'has-subnav' );
+		}
+	}
+}
+
+/* Active States Management */
+var active_state_timer = 0;
+var subnav_ancestor_timer = 0;
+var active_items = new Array();
+var active_items_hidden = false;
+var temp_subnav_ancestor = false;
+
+$('#nav > li').mouseenter( function() {
+	if ( ! $(this).is( '.current-menu-ancestor' ) && active_subnav ) {
+		clearTimeout( active_state_timer );
+		active_subnav.find( '> ul > li' ).css( 'visibility', 'hidden' );
+
+		if ( $(this).is( '.was-ancestor' ) )
+			active_subnav.find( '> ul > li' ).css( 'visibility', 'visible' );
+
+		if ( ! active_items_hidden )
+			hide_active_items();
+	}
+	else {
+		clearTimeout( active_state_timer );
+		if ( active_subnav )
+			active_subnav.find( '> ul > li' ).css( 'visibility', 'visible' );
+		show_active_items();
+	}
+} );
+$('#nav > li').mouseleave( function() {
+	if ( ! $(this).is( '.current-menu-ancestor' ) && active_subnav && $('nav.subnav[data-parent=' + $(this).attr( 'data-slug' ) + ']').length == 0 ) {
+		active_state_timer = setTimeout( "active_subnav.find( '> ul > li' ).css( 'visibility', 'visible' ); show_active_items();", dropdown_timeout );
+	}
+} );
+$('.subnav li').mouseenter( function() {
+	clearTimeout( active_state_timer );
+} );
+$('.subnav').mouseleave( function() {
+	if ( active_subnav )
+		active_state_timer = setTimeout( "active_subnav.find( '> ul > li' ).css( 'visibility', 'visible' ); show_active_items();", dropdown_timeout );
+} );
+$('.subnav .third-level').mouseleave( function() {
+	if ( active_subnav ) {
+		clearTimeout( active_state_timer );
+		active_subnav.find( '> ul > li' ).css( 'visibility', 'visible' );
+		active_state_timer = setTimeout( "show_active_items();", dropdown_timeout );
+	}
+} );
+if ( $('.subnav li.current-menu-ancestor').length != 0 ) {
+	temp_subnav_ancestor = $('.subnav li.current-menu-ancestor').first();
+	$('.subnav li').mouseenter( function() {
+		clearTimeout( subnav_ancestor_timer );
+		temp_subnav_ancestor.removeClass( 'current-menu-ancestor' );
+	} );
+	$('.subnav li').mouseleave( function() {
+		subnav_ancestor_timer = setTimeout( "temp_subnav_ancestor.addClass( 'current-menu-ancestor' );", dropdown_timeout );
+	} );
+}
+
+function hide_active_items() {
+	active_items = new Array();
+	$('#nav > li.current-menu-ancestor, .subnav .current-menu-ancestor').each( function() {
+		active_items.push( $(this) );
+		$(this).removeClass( 'current-menu-ancestor' ).addClass( 'was-ancestor' );
+	} );
+	active_items_hidden = true;
+}
+
+function show_active_items() {
+	for ( i = 0; i < active_items.length; i++ ) {
+		active_items[ i ].addClass( 'current-menu-ancestor' ).removeClass( 'was-ancestor' );
+	}
+	active_items_hidden = false;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Announcements
+/*-----------------------------------------------------------------------------------*/
+$announcements = $( '#announcements' );
+if ( $announcements.length !== 0 ) {
+	// Check if announcement has been closed
+	if ( typeof Cookies.get( 'close_cmr_announcement' ) == 'undefined' ) {
+		$announcements.find( '.close' ).click(function() {
+			Cookies.set( 'close_cmr_announcement', 'yes', { expires: 7 } );
+			$announcements.slideUp( 300 );
+
+			return false;
+		});
+
+		$announcements.find( '.royalSlider' ).royalSlider({
+			loop: true,
+			imageScalePadding: 0,
+			imageScaleMode: 'none',
+			slidesSpacing: 0,
+			autoHeight: false,
+			arrowsNav: false,
+			controlNavigation: 'none',
+			autoPlay: {
+				enabled: true,
+				pauseOnHover: false,
+				delay: 5000
+			}
+		});
+	}
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Back to Top Arrow
+/*-----------------------------------------------------------------------------------*/
+if ( $( '#side-back-to-top' ).length !== 0 ) {
+	$( '#side-back-to-top' ).click(function() {
+		$('html,body').animate( {
+			scrollTop: 0
+		}, 1000 );
+
+		return false;
+	});
+
+	$( window ).scroll(function() {
+		if ( $( window ).scrollTop() > 60 && $( document ).height() > 1200 && $( 'footer' ).position().top > ( $( window ).scrollTop() + $( window ).height() ) )
+			$( '#side-back-to-top' ).fadeIn();
+		else
+			$( '#side-back-to-top' ).fadeOut();
+	});
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Home
+/*-----------------------------------------------------------------------------------*/
+/* Home Slider */
+if ( $('#home-slider').length != 0 ) {
+	// Variables
+	var home_slider;
+
+	// Set overlays
+	$(window).resize( function() {
+		var overlays_width = Math.ceil( ( $(window).width() - 1000 ) / 2 );
+		if ( overlays_width < 0 )
+			overlays_width = 0;
+
+		$('#home-slider .overlay-left').css( 'width', overlays_width );
+		$('#home-slider .overlay-right').css( 'width', overlays_width );
+	} );
+	$(window).resize();
+
+	// Royal slider
+	home_slider = $('#home-slider .slider-stage').royalSlider( {
+		loop: true,
+		autoScaleSlider: true,
+		imgWidth: 1000,
+		imgHeight: 560,
+		imageScalePadding: 0,
+		imageScaleMode: 'fill',
+		slidesSpacing: 0,
+		autoHeight: false,
+		arrowsNav: false,
+		autoPlay: {
+			enabled: true,
+			pauseOnHover: false,
+			delay: 7000
+		}
+	} ).data( 'royalSlider' );
+
+	// Overlay events
+	$('#home-slider .overlay-left').click( function() {
+		home_slider.prev();
+	} );
+	$('#home-slider .overlay-right').click( function() {
+		home_slider.next();
+	} );
+}
+
+/* Home News Sliders */
+if ( $('#home-news .slider').length != 0 ) {
+	$('#home-news .slider').each( function() {
+		if ( $(this).find( '.rsContent' ).length > 1 ) {
+			// Royal slider
+			$(this).royalSlider( {
+				loop: true,
+				autoScaleSlider: false,
+				imageScalePadding: 0,
+				imageScaleMode: 'none',
+				slidesSpacing: 0,
+				autoHeight: false,
+				arrowsNav: false
+			} );
+		}
+	} );
+}
+
+/* Home Tweets */
+function change_home_tweet() {
+	if ( $('#home-cols .col.tweets .content.active').next( '.content' ).length != 0 )
+		$('#home-cols .col.tweets .content.active').removeClass( 'active' ).fadeOut().next( '.content' ).addClass( 'active' ).fadeIn();
+	else {
+		$('#home-cols .col.tweets .content.active').removeClass( 'active' ).fadeOut();
+		$('#home-cols .col.tweets .content').first().addClass( 'active' ).fadeIn();
+	}
+}
+
+if ( $('#home-cols .col.tweets').length != 0 ) {
+	$('#home-cols .col.tweets').height( $('#home-cols .col.tweets .content.active').height() + 3 );
+	$('#home-cols .col.tweets .content.active').fadeIn();
+	setInterval( 'change_home_tweet()', 5000 );
+}
+
+/* Home Announcements */
+function change_home_announcement() {
+	if ( $('#home-cols .col.announcements .announcement.active').next( '.announcement' ).length != 0 )
+		$('#home-cols .col.announcements .announcement.active').removeClass( 'active' ).fadeOut().next( '.announcement' ).addClass( 'active' ).fadeIn();
+	else {
+		$('#home-cols .col.announcements .announcement.active').removeClass( 'active' ).fadeOut();
+		$('#home-cols .col.announcements .announcement').first().addClass( 'active' ).fadeIn();
+	}
+}
+
+if ( $('#home-cols .col.announcements').length !== 0 ) {
+	$('#home-cols .col.announcements').height( $('#home-cols .col.tweets').height() - 3 );
+	$('#home-cols .col.announcements .announcement.active').fadeIn();
+
+	if ( $('#home-cols .col.announcements .announcement').length > 1 )
+		setInterval( 'change_home_announcement()', 5000 );
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Banner
+/*-----------------------------------------------------------------------------------*/
+if ( $('#banner .color').length != 0 ) {
+	$(window).resize( function() {
+		var offset = Math.round( ( $(window).width() - $('#banner .color').width() ) / 2 );
+		if ( $('#banner .grayscale-1').length != 0 )
+			$('#banner .grayscale-1').css( 'right', $(window).width() - offset );
+
+		if ( $('#banner .grayscale-2').length != 0 )
+			$('#banner .grayscale-2').css( 'left', $(window).width() - offset );
+	} );
+	$(window).resize();
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Sections Formatting
+/*-----------------------------------------------------------------------------------*/
+if ( $( '.section.four-col-image .cols article .hover' ).length !== 0 ) {
+	$( '.section.four-col-image .cols article .hover' ).css( 'display', 'block' );
+	vertically_align( $( '.section.four-col-image .cols article .hover span' ), $( '.section.four-col-image .cols article .hover' ) );
+	$( '.section.four-col-image .cols article .hover' ).css( 'display', 'none' );
+}
+
+if ( $( '.section.two-col-image article .hover' ).length !== 0 ) {
+	$( '.section.two-col-image article .hover' ).css( 'display', 'block' );
+	vertically_align( $( '.section.two-col-image article .hover span' ), $( '.section.two-col-image article .hover' ) );
+	$( '.section.two-col-image article .hover' ).css( 'display', 'none' );
+}
+
+if ( $( '.section.three-col-image article .hover' ).length !== 0 ) {
+	$( '.section.three-col-image article .hover' ).css( 'display', 'block' );
+	vertically_align( $( '.section.three-col-image article .hover span' ), $( '.section.three-col-image article .hover' ) );
+	$( '.section.three-col-image article .hover' ).css( 'display', 'none' );
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Calendar
+/*-----------------------------------------------------------------------------------*/
+// Variables
+var calendar_day = 0;
+var calendar_month = 0;
+var calendar_year = 0;
+var months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+
+/* Calendar Widget */
+function generate_calendar_widget( month, year, filters ) {
+	// Loading
+	$('.widget.calendar').html( '&nbsp;' ).addClass( 'loading' );
+
+	// Get calendar via AJAX
+	$.ajax( {
+		url: template_url + '/ajax/calendar-widget.php',
+		type: 'POST',
+		data: { month : month, year : year, filters : filters },
+		dataType: 'html',
+		success: function( data ) {
+			$('.widget.calendar').removeClass( 'loading' ).html( data );
+
+			// Add click event if not home page
+			if ( $('#home-events .calendar').length == 0 ) {
+				$('.widget.calendar td a').click( function() {
+					// Add day filter to calendar
+					$('#calendar').attr( 'data-calendar-day', $(this).attr( 'data-day' ) );
+
+					update_month_year();
+					generate_list_calendar();
+
+					return false;
+				} );
+			}
+		},
+		error: function( jqXHR, text_status, error_thrown ) {
+			$('.widget.calendar').removeClass( 'loading' );
+			alert( 'There was a problem getting the calendar. Please try after some time.' );
+		}
+	} );
+}
+
+// Generate widget for home page on page load
+if ( $('#home-events .calendar').length != 0 ) {
+	var todays_date = new Date();
+	generate_calendar_widget( todays_date.getMonth() + 1, todays_date.getFullYear(), '' );
+}
+
+/* Calendar Page */
+if ( $('#calendar').length != 0 ) {
+	// Calendar Type
+	$('#calendar .calendar-type a').click( function() {
+		if ( ! $(this).parent().is( '.active' ) ) {
+			$('#calendar').attr( 'data-calendar-type', $(this).attr( 'class' ) );
+			render_calendar();
+		}
+
+		return false;
+	} );
+
+	// Filters
+	var checkbox_click = false;
+	$('#calendar .filters a').click( function() {
+		// All event types
+		if ( $(this).parent().is( '.all' ) ) {
+			$('#calendar').attr( 'data-event-types', '' );
+			$('#calendar .filters li').removeClass( 'active' );
+			render_calendar();
+			return false;
+		}
+
+		if ( $(this).parent().is( '.active' ) )
+			$(this).parent().removeClass( 'active' );
+		else
+			$(this).parent().addClass( 'active' );
+
+		if ( ! checkbox_click ) {
+			if ( $(this).parent().find( 'input[type="checkbox"]' ).is( ':checked' ) )
+				$(this).parent().find( 'input[type="checkbox"]' ).prop( 'checked', false );
+			else
+				$(this).parent().find( 'input[type="checkbox"]' ).prop( 'checked', true );
+		}
+
+		checkbox_click = false;
+
+		var events_string = '';
+		$('#calendar .filters li.active a').each( function() {
+			events_string += $(this).attr( 'data-event-type' ) + ','
+		} );
+		events_string = events_string.replace( /,+$/,'' );
+
+		$('#calendar').attr( 'data-event-types', events_string );
+		render_calendar();
+
+		return false;
+	} );
+
+	$('#calendar .filters input[type="checkbox"]').prop( 'checked', false );
+	$('#calendar .filters input[type="checkbox"]').click( function() {
+		checkbox_click = true;
+		$(this).parent().find( 'a' ).click();
+	} );
+
+	// Calendar navigation
+	$('#calendar .month-nav .next').click( function() {
+		// Reset calendar day
+		$('#calendar').attr( 'data-calendar-day', '' );
+		
+		var my_month = $('#calendar').attr( 'data-calendar-month' );
+		my_month ++;
+		if ( my_month > 12 ) {
+			my_month = 1;
+
+			var my_year = $('#calendar').attr( 'data-calendar-year' );
+			$('#calendar').attr( 'data-calendar-year', ( parseInt( my_year ) + 1 ) );
+		}
+		$('#calendar').attr( 'data-calendar-month', my_month );
+
+		update_month_year();
+		render_calendar();
+
+		return false;
+	} );
+	$('#calendar .month-nav .prev').click( function() {
+		// Reset calendar day
+		$('#calendar').attr( 'data-calendar-day', '' );
+		
+		var my_month = $('#calendar').attr( 'data-calendar-month' );
+		my_month --;
+		if ( my_month < 1 ) {
+			my_month = 12;
+
+			var my_year = $('#calendar').attr( 'data-calendar-year' );
+			$('#calendar').attr( 'data-calendar-year', ( parseInt( my_year ) - 1 ) );
+		}
+		$('#calendar').attr( 'data-calendar-month', my_month );
+
+		update_month_year();
+		render_calendar();
+
+		return false;
+	} );
+
+	// Update the month and year of the calendar
+	function update_month_year() {
+		calendar_day = $('#calendar').attr( 'data-calendar-day' );
+		calendar_month = $('#calendar').attr( 'data-calendar-month' );
+		calendar_year = $('#calendar').attr( 'data-calendar-year' );
+		$('#calendar .month-nav span').text( months[ calendar_month - 1 ] + ' ' + calendar_year );
+	}
+
+	// Function to get the list view calender via AJAX
+	function generate_list_calendar() {
+		// Loading
+		$('#calendar .list-view .events-list').html( '&nbsp;' ).addClass( 'loading' );
+
+		// Get calendar via AJAX
+		$.ajax( {
+			url: template_url + '/ajax/calendar-list.php',
+			type: 'POST',
+			data: { day : calendar_day, month : calendar_month, year : calendar_year, event_types : $('#calendar').attr( 'data-event-types' ) },
+			dataType: 'html',
+			success: function( data ) {
+				$('#calendar .list-view .events-list').removeClass( 'loading' ).html( data );
+			},
+			error: function( jqXHR, text_status, error_thrown ) {
+				$('#calendar .list-view .events-list').removeClass( 'loading' );
+				alert( 'There was a problem getting the list view calendar. Please try after some time.' );
+			}
+		} );
+	}
+
+	// Function to get the grid view calender via AJAX
+	function generate_grid_calendar() {
+		// Loading
+		$('#calendar .grid-view').html( '&nbsp;' ).addClass( 'loading' );
+
+		// Get calendar via AJAX
+		$.ajax( {
+			url: template_url + '/ajax/calendar-grid.php',
+			type: 'POST',
+			data: { day : calendar_day, month : calendar_month, year : calendar_year, event_types : $('#calendar').attr( 'data-event-types' ) },
+			dataType: 'html',
+			success: function( data ) {
+				$('#calendar .grid-view').removeClass( 'loading' ).html( data );
+			},
+			error: function( jqXHR, text_status, error_thrown ) {
+				$('#calendar .grid-view').removeClass( 'loading' );
+				alert( 'There was a problem getting the grid view calendar. Please try after some time.' );
+			}
+		} );
+	}
+
+	// Main calendar rendering function
+	function render_calendar() {
+		// Determine calendar type
+		var calendar_type = $('#calendar').attr( 'data-calendar-type' );
+
+		// Calendar type navigation
+		$('#calendar .calendar-type li').removeClass( 'active' );
+		$('#calendar .calendar-type li a.' + calendar_type).parent().addClass( 'active' );
+
+		update_month_year();
+
+		// List view
+		if ( calendar_type == 'list' ) {
+			$('#calendar .list-view').addClass( 'active' );
+			$('#calendar .grid-view').removeClass( 'active' );
+
+			generate_calendar_widget( calendar_month, calendar_year, $('#calendar').attr( 'data-event-types' ) );
+			generate_list_calendar();
+		}
+		// Grid view
+		else {
+			$('#calendar .list-view').removeClass( 'active' );
+			$('#calendar .grid-view').addClass( 'active' );
+
+			generate_grid_calendar();
+		}
+	}
+
+	// Render calendar on page load
+	render_calendar();
+
+	// Check for event type in URL
+	if ( location.hash != '' ) {
+		var my_hash = location.hash.split( '/' );
+		var my_event_types = my_hash[2];
+		if ( my_event_types !== undefined ) {
+			my_event_types = my_event_types.split( ',' );
+			for ( i = 0; i < my_event_types.length; i++ ) {
+				$('#calendar .filters a[data-event-type=' + $.trim( my_event_types[ i ] ) + ']').click();
+			}
+		}
+	}
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	FAQs
+/*-----------------------------------------------------------------------------------*/
+if ( $( '.section.faqs' ).length !== 0 ) {
+	$( '.section.faqs article h4 a' ).click(function() {
+		if ( $( this ).parent().parent().is( '.active' ) )
+			$( this ).parent().parent().removeClass( 'active' );
+		else
+			$( this ).parent().parent().addClass( 'active' );
+
+		$( this ).parent().parent().find( 'div' ).slideToggle();
+
+		return false;
+	});
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Tabs
+/*-----------------------------------------------------------------------------------*/
+$('.tabs-nav a').click( function() {
+	// Check if tab is already active
+	if ( ! $(this).parent().is( '.active' ) ) {
+		// Manage active class for filter
+		$('.tabs-nav li').removeClass( 'active' );
+		$(this).parent().addClass( 'active' );
+
+		// Manage active class for tab
+		var tabs_container = $( $(this).parent().parent().attr( 'data-tabs-container' ) );
+		tabs_container.find( '.tab' ).removeClass( 'active' );
+		tabs_container.find( '.tab[data-tab="' + $(this).attr( 'data-tab' ) + '"]' ).addClass( 'active' );
+	}
+
+	return false;
+} );
+
+/*-----------------------------------------------------------------------------------*/
+/*	Contact Form, Question Form
+/*-----------------------------------------------------------------------------------*/
+if ( $('section.quick-question .form').length != 0 && $('section.quick-question .form').attr( 'data-message-sent' ) != '' ) {
+	$(document).ready( function() {
+		if ( $('section.quick-question .form').attr( 'data-message-sent' ) == 'true' )
+			alert( "Thank you for your message.\nWe will review it and get back to you shortly." );
+		else
+			alert( "There was a problem sending your message.\nPlease try again after some time." );
+	} );
+}
+if ( $('#contact .col-right').length != 0 && $('#contact .col-right').attr( 'data-message-sent' ) != '' ) {
+	$(document).ready( function() {
+		if ( $('#contact .col-right').attr( 'data-message-sent' ) == 'true' )
+			alert( "Thank you for your message.\nWe will review it and get back to you shortly." );
+		else
+			alert( "There was a problem sending your message.\nPlease try again after some time." );
+	} );
+}
+
+// Email validation
+function valid_email( email ) { 
+	var re = /[^\s@]+@[^\s@]+\.[^\s@]+/
+	return re.test(email);
+} 
+
+// Validate funtions
+function validate_question_form() {
+	if ( $('section.quick-question .name').attr( 'value' ) == '' ) {
+		alert( 'Please enter your name' );
+		$('section.quick-question .name').focus();
+		return false;
+	}
+	if ( $('section.quick-question .email').attr( 'value' ) == '' || ! valid_email( $('section.quick-question .email').attr( 'value' ) ) ) {
+		alert( 'Please enter a valid email' );
+		$('section.quick-question .email').focus();
+		return false;
+	}
+	if ( $('section.quick-question .message').attr( 'value' ) == '' ) {
+		alert( 'Please enter your message' );
+		$('section.quick-question .message').focus();
+		return false;
+	}
+
+	return true;
+}
+function validate_contact_form() {
+	if ( $('#contact .col-right .name').attr( 'value' ) == '' ) {
+		alert( 'Please enter your name' );
+		$('#contact .col-right .name').focus();
+		return false;
+	}
+	if ( $('#contact .col-right .subject').attr( 'value' ) == '' ) {
+		alert( 'Please select a subject' );
+		$('#contact .col-right .subject').focus();
+		return false;
+	}
+	if ( $('#contact .col-right .email').attr( 'value' ) == '' || ! valid_email( $('#contact .col-right .email').attr( 'value' ) ) ) {
+		alert( 'Please enter a valid email' );
+		$('#contact .col-right .email').focus();
+		return false;
+	}
+	if ( $('#contact .col-right .message').attr( 'value' ) == '' ) {
+		alert( 'Please enter your message' );
+		$('section.quick-question .message').focus();
+		return false;
+	}
+
+	return true;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	ACF Google Map
+/*-----------------------------------------------------------------------------------*/
+function render_map( $el ) {
+	// var
+	var $markers = $el.find('.marker');
+	// vars
+	var args = {
+		zoom		: 16,
+		center		: new google.maps.LatLng(0, 0),
+		mapTypeId	: google.maps.MapTypeId.ROADMAP,
+		scrollwheel : false,
+		navigationControl	: false,
+		mapTypeControl	: false,
+		scaleControl	: false,
+		draggable	: false
+	};
+	// create map	        	
+	var map = new google.maps.Map( $el[0], args);
+	// add a markers reference
+	map.markers = [];
+	// add markers
+	$markers.each(function(){
+		add_marker( $(this), map );
+	});
+	// center map
+	center_map( map );
+}
+ 
+function add_marker( $marker, map ) {
+	// var
+	var latlng = new google.maps.LatLng( $marker.attr('data-lat'), $marker.attr('data-lng') );
+	// create marker
+	var marker = new google.maps.Marker({
+		position	: latlng,
+		map			: map
+	});
+	// add to array
+	map.markers.push( marker );
+	// if marker contains HTML, add it to an infoWindow
+	if( $marker.html() )
+	{
+		// create info window
+		var infowindow = new google.maps.InfoWindow({
+			content		: $marker.html()
+		});
+		// show info window when marker is clicked
+		google.maps.event.addListener(marker, 'click', function() {
+			infowindow.open( map, marker );
+		});
+		infowindow.open( map, marker );
+	}
+}
+
+function center_map( map ) {
+	// vars
+	var bounds = new google.maps.LatLngBounds();
+	// loop through all markers and create bounds
+	$.each( map.markers, function( i, marker ){
+		var latlng = new google.maps.LatLng( marker.position.lat(), marker.position.lng() );
+		bounds.extend( latlng );
+	});
+	// only 1 marker?
+	if( map.markers.length == 1 )
+	{
+		// set center of map
+		map.setCenter( bounds.getCenter() );
+		map.setZoom( 16 );
+	}
+	else
+	{
+		// fit to bounds
+		map.fitBounds( bounds );
+	}
+}
+
+if ( $('.acf-map').length != 0 ) {
+	$('.acf-map').each(function(){
+		render_map( $(this) );
+	});
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Placeholders
+/*-----------------------------------------------------------------------------------*/
+function enable_placeholders() {
+	$('[placeholder]').focus( function() {
+		var input = $(this);
+		if ( input.val() == input.attr( 'placeholder' ) ) {
+			input.val( '' );
+			input.removeClass( 'placeholder' );
+		}
+	} ).blur( function() {
+		var input = $(this);
+		if ( input.val() == '' || input.val() == input.attr( 'placeholder' ) ) {
+			input.addClass( 'placeholder' );
+			input.val( input.attr( 'placeholder' ) );
+		}
+	} ).blur();
+}
+enable_placeholders();
+
+/*-----------------------------------------------------------------------------------*/
+/*	Fancybox
+/*-----------------------------------------------------------------------------------*/
+$('.fancybox').fancybox( {
+	helpers:  {
+		title : {
+			type : 'inside'
+		}
+	}
+} );
+
+/*-----------------------------------------------------------------------------------*/
+/*	Smooth Scroll
+/*-----------------------------------------------------------------------------------*/
+$('#page-nav a, footer .back-to-top').click( function() {
+	// Acquire target
+	var target = $(this.hash);
+	var correction = 0;
+	target = target.length ? target : $('body');
+
+	if ( $('.subnav').length != 0 )
+		correction = $('.subnav').first().outerHeight();
+
+	// Scroll to target
+	$('html,body').animate( {
+		scrollTop: target.offset().top - correction
+	}, 1000 );
+	
+	return false;
+} );
+
+/* Mobile responsiveness Menu */
+function adjustResMenuHeight()
+{
+	if($('#announcements').is(":visible")) 
+		var height = $('#announcements').height() + 15;
+	else 
+		var height =  '15px' ;
+	$('#responsive-menu-button').css({'top': height});     
+}
+
+$(function(){
+	adjustResMenuHeight();
+	$('#announcements .close').click(function(){
+		$('#announcements').hide();
+		adjustResMenuHeight(); 
+	}); 
+});
+
+$(function(){
+	$('#responsive-menu-button').click(function(){
+		if($('#announcements').is(':visible'))
+			$('#responsive-menu-container').css('padding-top',180);
+		else
+			$('#responsive-menu-container').css('padding-top',90);
+	});
+});

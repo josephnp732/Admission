@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Welcome.Welcome_Controller">
+   <children>
+      <ImageView fx:id="department" fitHeight="130.0" fitWidth="130.0" onMouseClicked="#load_department" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/Departments.png" />
+         </image>
+         <StackPane.margin>
+            <Insets left="-270.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fx:id="placement" fitHeight="130.0" fitWidth="130.0" onMouseClicked="#load_sample" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/Placement2.png" />
+         </image>
+         <StackPane.margin>
+            <Insets left="270.0" />
+         </StackPane.margin>
+      </ImageView>
+      <Label text="Departments">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+         <StackPane.margin>
+            <Insets left="-270.0" top="180.0" />
+         </StackPane.margin>
+      </Label>
+      <Label text="Placements">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+         <StackPane.margin>
+            <Insets left="270.0" top="180.0" />
+         </StackPane.margin>
+      </Label>
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" nodeOrientation="LEFT_TO_RIGHT" text="WELCOME" textAlignment="CENTER" textFill="#3b08b2" textOverrun="CLIP">
+         <font>
+            <Font name="Bell MT Bold" size="48.0" />
+         </font>
+         <StackPane.margin>
+            <Insets top="-430.0" />
+         </StackPane.margin>
+      </Label>
+      <ImageView fx:id="cmrit" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/CMRIT.png" />
+         </image>
+         <StackPane.margin>
+            <Insets right="-1160.0" top="-643.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fx:id="back" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#goback" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/back.png" />
+         </image>
+         <StackPane.margin>
+            <Insets left="-1290.0" top="-680.0" />
+         </StackPane.margin>
+      </ImageView>
+      <Label text="Back">
+         <font>
+            <Font name="Modern No. 20" size="24.0" />
+         </font>
+         <StackPane.margin>
+            <Insets left="-1170.0" top="-680.0" />
+         </StackPane.margin>
+      </Label>
+   </children>
+</StackPane>

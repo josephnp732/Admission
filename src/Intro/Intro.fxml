@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Intro.Intro_Controller">
+   <children>
+      <StackPane prefHeight="1400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <ImageView fx:id="welcome" fitHeight="130.0" fitWidth="130.0" onMouseClicked="#welcome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/Welcome.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets left="280.0" />
+               </StackPane.margin>
+            </ImageView>
+            <Label text="iHelp">
+               <StackPane.margin>
+                  <Insets left="-280.0" top="180.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="Modern No. 20" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Admissions">
+               <StackPane.margin>
+                  <Insets left="280.0" top="180.0" />
+               </StackPane.margin>
+               <font>
+                  <Font name="Modern No. 20" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="ihelp" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/i.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets left="-280.0" />
+               </StackPane.margin>
+            </ImageView>
+            <Label alignment="TOP_CENTER" contentDisplay="TOP" text="Welcome to CMR Institute of Technology" textAlignment="CENTER" textFill="#1800a1" textOverrun="WORD_ELLIPSIS" wrapText="true">
+               <font>
+                  <Font name="Bell MT Italic" size="36.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets top="-400.0" />
+               </StackPane.margin>
+            </Label>
+         </children>
+      </StackPane>
+      <ImageView fitHeight="123.0" fitWidth="179.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/CMRIT.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
